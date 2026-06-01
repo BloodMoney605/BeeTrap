@@ -213,11 +213,19 @@ p{color:#5f6368;font-size:16px}
                     user_agent=self.headers.get("User-Agent"),
                 )
 
-        return requests.request(
-            method=method, url=target_url, headers=headers, data=body,
-            cookies=self._extract_cookies(), allow_redirects=False,
-            timeout=30, verify=False,
-        )
+        kwargs = {
+            "method": method, "url": target_url, "headers": headers,
+            "data": body, "cookies": self._extract_cookies(),
+            "allow_redirects": False, "timeout": 30, "verify": False,
+        }
+
+        if getattr(self.config, "tor_enabled", False):
+            kwargs["proxies"] = {
+                "http": "socks5h://127.0.0.1:9050",
+                "https": "socks5h://127.0.0.1:9050",
+            }
+
+        return requests.request(**kwargs)
 
     def _procesar_respuesta(self, response, original_url):
         for header in ["connection", "keep-alive", "proxy-authenticate",

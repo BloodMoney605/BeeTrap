@@ -131,7 +131,7 @@ def menu_seguridad():
 
     opciones = [
         ("Medidas basicas", "MAC aleatoria + bloqueo lateral + aislar interfaz + sin logs + namespace"),
-        ("Identidad y ubicacion", "Subred aleatoria + zona horaria falsa + hostname cambiado"),
+        ("Identidad y ubicacion", "Subred aleatoria + zona horaria falsa + hostname cambiado + salida por Tor"),
         ("Huella digital de red", "TTL spoof + TCP timestamps off + IPv6 off + DHCP fingerprint random"),
         ("Contra-analisis forense", "Core dumps off + machine-id aleatorio + /tmp tmpfs + limpiar historial"),
     ]
@@ -230,6 +230,10 @@ def modo_honeypot(target, ssid, iface, seguridad, port=8080, capture_dir="./capt
         print("  [2] Identidad: subred " + net["gw"] + "/24")
         st.zona_horaria_falsa(guardar_en=restauracion.setdefault("tz", []))
         st.hostname_aleatorio(guardar_en=restauracion.setdefault("hostname", []))
+        if st.tor_disponible():
+            print("      salida Tor: activa")
+        else:
+            print("      Tor no disponible (instalar: apt install tor)")
     else:
         net = None
 
@@ -260,6 +264,7 @@ def modo_honeypot(target, ssid, iface, seguridad, port=8080, capture_dir="./capt
         capture_path=capture_dir,
         extra_domains=target.get("extra", []),
         ssid=ssid,
+        tor_enabled=st.tor_disponible(),
     ))
     t = threading.Thread(target=proxy.arrancar, daemon=True)
     t.start()

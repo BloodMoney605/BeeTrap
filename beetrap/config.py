@@ -1,5 +1,4 @@
 import os
-import json
 
 
 PRESETS = {
@@ -44,7 +43,7 @@ PRESETS = {
 class ProxyConfig:
     def __init__(self, target_domain, listen_host="0.0.0.0", listen_port=8080,
                  use_https=False, capture_path="./captures", extra_domains=None,
-                 ssid=None):
+                 ssid=None, tor_enabled=False):
         self.target_domain = target_domain.rstrip("/")
         self.listen_host = listen_host
         self.listen_port = listen_port
@@ -52,6 +51,7 @@ class ProxyConfig:
         self.capture_path = capture_path
         self.extra_domains = extra_domains or []
         self.ssid = ssid or "wifi"
+        self.tor_enabled = tor_enabled
 
         self._normalize_target()
 

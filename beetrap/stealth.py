@@ -156,3 +156,15 @@ def dhcp_vendor_random():
         "Windows 10.0.19045", "Windows 10.0.22631",
     ]
     return random.choice(vendors)
+
+
+def tor_disponible():
+    r = _comando("which tor 2>/dev/null && pgrep -x tor >/dev/null 2>&1", check=False)
+    return r.returncode == 0
+
+
+def tor_proxies():
+    return {
+        "http": "socks5h://127.0.0.1:9050",
+        "https": "socks5h://127.0.0.1:9050",
+    }

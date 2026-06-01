@@ -67,21 +67,6 @@ def interfaz_soporta_ap(iface):
         sys.exit(1)
 
 
-def detectar_interfaz():
-    result = _run("iw dev | grep Interface", check=False)
-    if result.returncode == 0:
-        lines = result.stdout.strip().split("\n")
-        for line in lines:
-            parts = line.split()
-            if len(parts) >= 2:
-                return parts[-1]
-    for candidate in ["wlan0", "wlan1", "wlp2s0", "wlp3s0"]:
-        if os.path.exists(f"/sys/class/net/{candidate}"):
-            return candidate
-    print("No se encontro interfaz WiFi")
-    sys.exit(1)
-
-
 def _escribir_hostapd(iface, ssid):
     with open(HOSTAPD_CONF, "w") as f:
         f.write(f"""interface={iface}

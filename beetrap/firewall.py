@@ -1,7 +1,6 @@
 import subprocess
 
 
-GATEWAY = "10.0.66.1"
 HONEY_NET = "10.0.66"
 
 
@@ -17,20 +16,6 @@ def redirect_http_to_proxy(interface, proxy_port):
     _run(
         f"iptables -t nat -A PREROUTING -i {interface} -p tcp --dport 80 "
         f"-j REDIRECT --to-port {proxy_port}"
-    )
-
-
-def drop_https_on_interface(interface):
-    _run(
-        f"iptables -t nat -A PREROUTING -i {interface} -p tcp --dport 443 "
-        f"-j DROP"
-    )
-
-
-def redirect_https_to_proxy(interface):
-    _run(
-        f"iptables -t nat -A PREROUTING -i {interface} -p tcp --dport 443 "
-        f"-j REDIRECT --to-port 443"
     )
 
 
