@@ -4,8 +4,12 @@ WiFi honeypot y evil twin proxy para auditoria de seguridad.
 Crea puntos de acceso falsos, suplanta paginas de login de servicios conocidos
 y captura credenciales en entornos de prueba controlados.
 
-> Solo para uso educativo y auditorias con autorizacion explicita.
-> El uso indebido es responsabilidad del usuario.
+> **Aviso legal:** BeeTrap fue creada exclusivamente con fines educativos y
+> de auditoria de seguridad autorizada. Esta herramienta permite comprender
+> como funcionan los ataques de tipo evil twin para poder defenderse de ellos.
+> El uso no autorizado contra redes de terceros es ilegal y eticamente
+> reprobable. Cada usuario es responsable del uso que le de a esta herramienta.
+> Si no estas realizando una auditoria con permiso explicito, no uses esto.
 
 ## Funcionalidades
 
