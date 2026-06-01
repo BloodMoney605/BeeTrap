@@ -1,1 +1,10 @@
-requests>=2.25.0
+# Python
+requests[socks]>=2.25.0
+# Tor (SOCKS proxy para ocultar IP real)
+# instalar con: sudo apt install tor
+
+# Sistema (instalar con apt):
+# hostapd - punto de acceso WiFi
+# dnsmasq - DHCP + DNS
+# iw - gestion de interfaces WiFi
+# iptables - redireccion de puertos
