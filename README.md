@@ -1,6 +1,6 @@
 # BeeTrap
 
-WiFi honeypot y evil twin proxy para auditoria de seguridad.
+Evil twin proxy para auditoria de seguridad.
 Crea puntos de acceso falsos, suplanta paginas de login de servicios conocidos
 y captura credenciales en entornos de prueba controlados.
 
@@ -14,7 +14,7 @@ y captura credenciales en entornos de prueba controlados.
 ## Funcionalidades
 
 - Punto de acceso WiFi con hostapd (modo AP, WMM, 802.11g/n)
-- Resuelve todo el DNS a la IP del honeypot con dnsmasq
+- Resuelve todo el DNS a la IP del atacante con dnsmasq
 - Captive portal funcional en Android, iOS, Windows y Firefox
 - Paginas de login falsas para 7 plataformas
 - Botones de redes sociales funcionales (Facebook, Google, X)
