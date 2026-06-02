@@ -219,7 +219,7 @@ def menu_ssid():
     return ssid
 
 
-def modo_honeypot(target, ssid, iface, seguridad, port=8080, capture_dir="./captures"):
+def modo_operacion(target, ssid, iface, seguridad, port=8080, capture_dir="./captures"):
     ap.es_root()
     ap._dependencias()
 
@@ -376,7 +376,7 @@ def main():
         print("  cancelado")
         sys.exit(0)
 
-    modo_honeypot(target, ssid, iface, seguridad, puerto, capture_dir)
+    modo_operacion(target, ssid, iface, seguridad, puerto, capture_dir)
 
 
 if __name__ == "__main__":

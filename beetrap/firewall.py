@@ -1,7 +1,7 @@
 import subprocess
 
 
-HONEY_NET = "10.0.66"
+TRAP_NET = "10.0.66"
 
 
 def _run(cmd, check=True):
@@ -27,10 +27,10 @@ def block_client_to_client(interface):
 
 def isolate_interface(interface):
     _run(
-        f"iptables -A FORWARD -i {interface} ! -d {HONEY_NET}.0/24 -j DROP"
+        f"iptables -A FORWARD -i {interface} ! -d {TRAP_NET}.0/24 -j DROP"
     )
     _run(
-        f"iptables -A FORWARD -o {interface} ! -s {HONEY_NET}.0/24 -j DROP"
+        f"iptables -A FORWARD -o {interface} ! -s {TRAP_NET}.0/24 -j DROP"
     )
 
 

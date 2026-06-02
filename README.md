@@ -111,7 +111,7 @@ BeeTrap/
 
 - Cambia la MAC de la interfaz WiFi
 - Bloquea movimiento lateral entre clientes
-- Aisla la interfaz del honeypot
+- Aisla la interfaz del atacante
 - Deshabilita logs del sistema
 - Namespace de red aislado
 
