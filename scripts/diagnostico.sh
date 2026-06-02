@@ -29,4 +29,4 @@ iptables -t nat -L PREROUTING -n 2>/dev/null | grep REDIRECT | head -3 || echo "
 echo
 
 echo "certificados:"
-ls -l ./credentials/ 2>/dev/null || echo "  no encontrados"
+ls -l "$(dirname "$0")/../credentials/" 2>/dev/null || echo "  no encontrados"
