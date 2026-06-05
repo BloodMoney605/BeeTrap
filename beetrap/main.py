@@ -270,7 +270,10 @@ def modo_operacion(target, ssid, iface, seguridad, port=8080, capture_dir="./cap
     t.start()
     time.sleep(1)
 
-    fw.redirect_http_to_proxy(iface, port)
+    if port == 80:
+        print("  Proxy HTTP en puerto 80 (directo, sin iptables)")
+    else:
+        fw.redirect_http_to_proxy(iface, port)
 
     if 1 in seguridad:
         print("  [1] Basicas: MAC + lateral + aislamiento + logging + namespace")
@@ -350,7 +353,7 @@ def main():
 
     target = menu_target()
     capture_dir = _input("Directorio de capturas", "./captures") or "./captures"
-    puerto_str = _input("Puerto del proxy", "8080")
+    puerto_str = _input("Puerto del proxy (80 = directo, sin iptables)", "80")
     try:
         puerto = int(puerto_str)
     except ValueError:

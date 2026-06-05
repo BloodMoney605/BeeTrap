@@ -12,7 +12,15 @@ def _run(cmd, check=True):
     return result
 
 
+def verificar_iptables():
+    result = _run("iptables -t nat -L -n 2>/dev/null", check=False)
+    return result.returncode == 0
+
+
 def redirect_http_to_proxy(interface, proxy_port):
+    if not verificar_iptables():
+        print("  [!] iptables no disponible. Usar puerto 80 para evitar iptables.")
+        return
     _run(
         f"iptables -t nat -A PREROUTING -i {interface} -p tcp --dport 80 "
         f"-j REDIRECT --to-port {proxy_port}"
@@ -20,12 +28,16 @@ def redirect_http_to_proxy(interface, proxy_port):
 
 
 def block_client_to_client(interface):
+    if not verificar_iptables():
+        return
     _run(
         f"iptables -I FORWARD -i {interface} -o {interface} -j DROP"
     )
 
 
 def isolate_interface(interface):
+    if not verificar_iptables():
+        return
     _run(
         f"iptables -A FORWARD -i {interface} ! -d {TRAP_NET}.0/24 -j DROP"
     )
